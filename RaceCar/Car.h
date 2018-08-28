@@ -17,10 +17,9 @@ public:
 
 	bool checkCrash(Road &track)
 	{
-		for (const auto &val : track.coords())
-			for (const auto &val2 : val)
-				if (val2 == m_coords)
-					return true;
+		for (const auto &val : track.coords()[m_screen->get_yScreen() - m_coords.m_y - 1])
+			if (val == m_coords)
+				return true;
 		return false;
 	}
 

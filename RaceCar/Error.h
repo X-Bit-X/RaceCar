@@ -3,7 +3,6 @@
 
 #include <exception>
 #include <string>
-#include <Windows.h>
 
 class Error : public std::exception
 {
