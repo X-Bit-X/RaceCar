@@ -64,7 +64,7 @@ public:
 
 	//----------------------------------Constructor & Destructor----------------------------------
 
-	Display(const char &xScreen = 30, const char &yScreen = 30, const char &fontW = 12, const char &fontH = 12)
+	Display(const char &xScreen = 30, const char &yScreen = 30, const wchar_t *fontName = L"Lucida Console", const char &fontW = 12, const char &fontH = 12)
 		: m_xScreen{ xScreen }, m_yScreen{ yScreen }
 	{
 		//Check if invalid
@@ -82,7 +82,7 @@ public:
 			throw Error("DisplayConstruct -> SetConsoleScreenBufferSize");
 
 		//Set the font & size
-		setFont(fontW, fontH, L"Lucida Console");
+		setFont(fontW, fontH, fontName);
 
 		//Check screen size
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -240,6 +240,23 @@ public:
 			m_screen[xy].Attributes = col;
 			m_screen[xy + i].Char.UnicodeChar = words[i];
 		}
+		return *this;
+	}
+
+	Display& box(const CellCoords &upLeft, const CellCoords &downRight, const wchar_t &character)
+	{
+		for (int y = upLeft.m_y; y <= downRight.m_y; y++)
+			for (int x = upLeft.m_x; x <= downRight.m_x; x++)
+				if ((y == upLeft.m_y || y == downRight.m_y) || (x == upLeft.m_x || x == downRight.m_x))
+					accessLoc(CellCoords(x, y)) = character;
+		return *this;
+	}
+
+	Display& fill(const CellCoords &upLeft, const CellCoords &downRight, const wchar_t &character = 0)
+	{
+		for (unsigned int y = upLeft.m_y; y <= downRight.m_y; y++)
+			for (unsigned int x = upLeft.m_x; x <= downRight.m_x; x++)
+				accessLoc(CellCoords(x, y)) = character;
 		return *this;
 	}
 
