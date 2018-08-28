@@ -23,6 +23,9 @@ public:
 		return false;
 	}
 
+	double distanceLeft(Road &track) { return m_coords.m_x - track.coords()[m_screen->get_yScreen() - m_coords.m_y - 1][0].m_x - 1; }
+	double distanceRight(Road &track) { return track.coords()[m_screen->get_yScreen() - m_coords.m_y - 1][1].m_x - m_coords.m_x - 1; }
+
 private:
 
 	CellCoords m_coords;
