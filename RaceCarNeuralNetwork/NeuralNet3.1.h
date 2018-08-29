@@ -84,7 +84,7 @@ public:
 
 	//--------------------------------------Function Methods--------------------------------------
 
-	NeuralNet& backProp(const std::vector<DataPackage> &data, const bool &log, const double &learnlimit = 0.001, const double &learningRate = 0.2, const double &momentum = 0.001)
+	NeuralNet& backProp(const std::vector<DataPackage> &data, const bool &log = false, const double &learnlimit = 0.001, const double &learningRate = 0.2, const double &momentum = 0.001)
 	{
 
 		for (const auto &val : data)
